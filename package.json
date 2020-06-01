@@ -20,6 +20,6 @@
     "test": "eslint js/"
   },
   "engines": {
-    "node": "10.19"
+    "node": "8.11"
   }
 }
