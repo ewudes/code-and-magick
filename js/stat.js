@@ -11,7 +11,10 @@ var COLUMN_Y = TEXT_Y - GAP;
 var MARGIN_TOP = 80;
 var COLUMN_GAP = 50;
 var COLUMN_WIDTH = 40;
+var USER_IDENT = 'Вы';
+var FONT = '16px PT Mono';
 var FONT_GAP = 16;
+var FONT_COLOR = '#000';
 var COLUMN_HEIGHT = -(CLOUD_HEIGHT - MARGIN_TOP - GAP - FONT_GAP - GAP);
 
 var renderCloud = function (ctx, x, y, color) {
@@ -29,13 +32,13 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
-var renderBar = function (ctx, player, time, maxTime, i) {
-  var color = player === 'Вы'
+var renderBar = function (ctx, player, time, maxTime, index) {
+  var color = player === USER_IDENT
     ? 'rgba(255, 0, 0, 1)'
     : 'hsl(240, ' + Math.floor(Math.random() * 100) + '%, 50%)';
-  var x = CLOUD_X + COLUMN_WIDTH * i + COLUMN_GAP * (i + 1);
+  var x = CLOUD_X + COLUMN_WIDTH * index + COLUMN_GAP * (index + 1);
   var height = (COLUMN_HEIGHT * time) / maxTime;
-  ctx.fillStyle = '#000';
+  ctx.fillStyle = FONT_COLOR;
   ctx.fillText(player, x, TEXT_Y);
   ctx.fillText(Math.round(time).toString(), x, COLUMN_Y + height - FONT_GAP);
   ctx.fillStyle = color;
@@ -48,9 +51,9 @@ window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
 
-  ctx.font = '16px PT Mono';
+  ctx.font = FONT;
   ctx.textBaseline = 'hanging';
-  ctx.fillStyle = '#000';
+  ctx.fillStyle = FONT_COLOR;
   ctx.fillText('Ура вы победили!', CLOUD_X + GAP * 2, CLOUD_Y + GAP * 2);
   ctx.fillText('Список результатов:', CLOUD_X + GAP * 2, CLOUD_Y + GAP * 2 + FONT_GAP);
 
